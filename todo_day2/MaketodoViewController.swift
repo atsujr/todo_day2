@@ -15,13 +15,37 @@ class MaketodoViewController: UIViewController {
     @IBOutlet weak var todoTextField: UITextField!
     @IBOutlet weak var shousaiTextField: UITextField!
     @IBOutlet weak var limitTextField: UITextField!
+    
+    var datePicker: UIDatePicker = UIDatePicker()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        limitTextField.delegate = self
-        // Do any additional setup after loading the view.
+        datePicker.datePickerMode = UIDatePicker.Mode.date
+        datePicker.timeZone = NSTimeZone.local
+        datePicker.locale = Locale(identifier: "MDY")
+        limitTextField.inputView = datePicker
+        //車輪型に指定している。
+        datePicker.preferredDatePickerStyle = .wheels
+        // 決定バーの生成
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 35))
+        let spacelItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let doneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        toolbar.setItems([spacelItem, doneItem], animated: true)
         
+        // インプットビュー設定
+        limitTextField.inputView = datePicker
+        limitTextField.inputAccessoryView = toolbar
+
     }
+    @objc func done() {
+        limitTextField.endEditing(true)
+           
+           // 日付のフォーマット
+           let formatter = DateFormatter()
+           formatter.dateFormat = "yyyy/MM/dd"
+        limitTextField.text = "\(formatter.string(from: Date()))"
+       }
     @IBAction func save(_ sender: Any) {
         let newTodo = Todo()
         newTodo.todo = todoTextField.text!
@@ -51,8 +75,3 @@ class MaketodoViewController: UIViewController {
      */
     
 }
-
-extension MaketodoViewController: UITextFieldDelegate {
-    
-}
-
