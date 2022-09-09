@@ -18,6 +18,7 @@ class MaketodoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        limitTextField.delegate = self
         // Do any additional setup after loading the view.
         
     }
@@ -50,3 +51,8 @@ class MaketodoViewController: UIViewController {
      */
     
 }
+
+extension MaketodoViewController: UITextFieldDelegate {
+    
+}
+

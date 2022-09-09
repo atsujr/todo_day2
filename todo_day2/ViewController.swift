@@ -11,6 +11,7 @@ import RealmSwift
 class ViewController: UIViewController{
     
     var todolist: Results<Todo>!
+    let realm = try! Realm()
     @IBOutlet weak var tableview: UITableView!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -24,8 +25,11 @@ class ViewController: UIViewController{
         tableview.delegate = self
         tableview.dataSource = self
         
+        
+        
         do{
             let realm = try Realm()
+            //この行は正直いらない(上でもインスタンス作ってるし)
             todolist = realm.objects(Todo.self)
             //全件取得している
             tableview.reloadData()
@@ -46,6 +50,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.timelabel.text = todolist[indexPath.row].date
         return cell
     }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+         if editingStyle == .delete {
+             try! realm.write {
+                 let item = todolist[indexPath.row]
+                 realm.delete(item)
+             }
+             tableView.deleteRows(at: [indexPath], with: .fade)
+         }
+     }
     
     
     
