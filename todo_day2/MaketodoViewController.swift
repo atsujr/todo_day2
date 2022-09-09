@@ -7,8 +7,8 @@
 import UIKit
 import RealmSwift
 class MaketodoViewController: UIViewController {
-    //realmを宣言
-    //var list: List<Todo>!
+    let realm = try! Realm()
+    var list: List<Todo>!
     //Todo型の配列(のようなもの)を宣言
     
     
@@ -53,9 +53,10 @@ class MaketodoViewController: UIViewController {
         newTodo.date = limitTextField.text!
         
         do{
-            let realm = try Realm()
+            let todolist = TodoList()
+            todolist.list.append(newTodo)
             try realm.write{
-                realm.add(newTodo)
+                realm.add(todolist)
                 print("ToDo Saved")
             }
         }catch{

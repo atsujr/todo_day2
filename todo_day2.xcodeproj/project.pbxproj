@@ -18,6 +18,7 @@
 		3B55483028C85419003621BB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3B55482F28C85419003621BB /* Realm */; };
 		3B55483228C85419003621BB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3B55483128C85419003621BB /* RealmSwift */; };
 		3B55483428CA4305003621BB /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55483328CA4305003621BB /* TodoTableViewCell.swift */; };
+		3B55483628CB4384003621BB /* TodoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55483528CB4384003621BB /* TodoList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		3B55482A28C85344003621BB /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		3B55482C28C85361003621BB /* MaketodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaketodoViewController.swift; sourceTree = "<group>"; };
 		3B55483328CA4305003621BB /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
+		3B55483528CB4384003621BB /* TodoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				3B55481C28C851CE003621BB /* Main.storyboard */,
 				3B55483328CA4305003621BB /* TodoTableViewCell.swift */,
 				3B55482A28C85344003621BB /* Todo.swift */,
+				3B55483528CB4384003621BB /* TodoList.swift */,
 				3B55481F28C851CE003621BB /* Assets.xcassets */,
 				3B55482128C851CE003621BB /* LaunchScreen.storyboard */,
 				3B55482428C851CE003621BB /* Info.plist */,
@@ -159,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B55481B28C851CE003621BB /* ViewController.swift in Sources */,
+				3B55483628CB4384003621BB /* TodoList.swift in Sources */,
 				3B55481728C851CE003621BB /* AppDelegate.swift in Sources */,
 				3B55482D28C85361003621BB /* MaketodoViewController.swift in Sources */,
 				3B55483428CA4305003621BB /* TodoTableViewCell.swift in Sources */,
