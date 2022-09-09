@@ -17,6 +17,10 @@ class ViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableview.reloadData()
+        
+            todolist = realm.objects(TodoList.self).first?.list
+            tableview.reloadData()
+
     }
     
     override func viewDidLoad() {
@@ -25,15 +29,15 @@ class ViewController: UIViewController{
         tableview.delegate = self
         tableview.dataSource = self
         
-        
-        
-        do{
-            todolist = realm.objects(TodoList.self).first?.list
-            tableview.reloadData()
-        }catch{
-            print("tableviewに移すときに失敗しました")
-        }
+        tableview.reloadData()
     }
+//        do{
+//            todolist = realm.objects(TodoList.self).first?.list
+//            tableview.reloadData()
+//        }catch{
+//            print("tableviewに移すときに失敗しました")
+//        }
+//  }
     
 }
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
