@@ -19,6 +19,7 @@
 		3B55483228C85419003621BB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3B55483128C85419003621BB /* RealmSwift */; };
 		3B55483428CA4305003621BB /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55483328CA4305003621BB /* TodoTableViewCell.swift */; };
 		3B55483628CB4384003621BB /* TodoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55483528CB4384003621BB /* TodoList.swift */; };
+		3B55483828CD8F3D003621BB /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55483728CD8F3D003621BB /* EditViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		3B55482C28C85361003621BB /* MaketodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaketodoViewController.swift; sourceTree = "<group>"; };
 		3B55483328CA4305003621BB /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		3B55483528CB4384003621BB /* TodoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoList.swift; sourceTree = "<group>"; };
+		3B55483728CD8F3D003621BB /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		3B55481528C851CE003621BB /* todo_day2 */ = {
 			isa = PBXGroup;
 			children = (
+				3B55483728CD8F3D003621BB /* EditViewController.swift */,
 				3B55481628C851CE003621BB /* AppDelegate.swift */,
 				3B55481828C851CE003621BB /* SceneDelegate.swift */,
 				3B55481A28C851CE003621BB /* ViewController.swift */,
@@ -161,6 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B55483828CD8F3D003621BB /* EditViewController.swift in Sources */,
 				3B55481B28C851CE003621BB /* ViewController.swift in Sources */,
 				3B55483628CB4384003621BB /* TodoList.swift in Sources */,
 				3B55481728C851CE003621BB /* AppDelegate.swift in Sources */,

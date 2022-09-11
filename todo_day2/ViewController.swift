@@ -11,6 +11,8 @@ import RealmSwift
 class ViewController: UIViewController{
     var todos = [Todo]()
     //var todolist: List<Todo>!
+    
+    var nextnum: Int!
     let realm = try! Realm()
     @IBOutlet weak var tableview: UITableView!
     
@@ -18,12 +20,12 @@ class ViewController: UIViewController{
         super.viewWillAppear(animated)
         tableview.reloadData()
         
-            //todolist = realm.objects(TodoList.self).first?.list
-            todos = Array(realm.objects(Todo.self))
+        //todolist = realm.objects(TodoList.self).first?.list
+        todos = Array(realm.objects(Todo.self))
         
         //配列が全部帰ってくる(realmに入ってるtodo型のやつが全部帰ってくる)
-            tableview.reloadData()
-
+        tableview.reloadData()
+        
     }
     
     override func viewDidLoad() {
@@ -33,14 +35,12 @@ class ViewController: UIViewController{
         tableview.dataSource = self
         
     }
-//        do{
-//            todolist = realm.objects(TodoList.self).first?.list
-//            tableview.reloadData()
-//        }catch{
-//            print("tableviewに移すときに失敗しました")
-//        }
-//  }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toNextViewController" {
+            let nextVC = segue.destination as! EditViewController
+            nextVC.selectedrowNum = nextnum
+        }
+    }
 }
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -74,7 +74,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // セルの選択を解除
+        tableView.deselectRow(at: indexPath, animated: true)
+        nextnum = indexPath.row
+        // 別の画面に遷移
+        performSegue(withIdentifier: "toNextViewController", sender: nil)
+    }
     
 }
 extension List {

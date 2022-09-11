@@ -6,9 +6,9 @@
 //
 import UIKit
 import RealmSwift
-class MaketodoViewController: UIViewController {
+class MaketodoViewController: UIViewController, UITextFieldDelegate {
     let realm = try! Realm()
-//    var list: List<Todo>!
+    //    var list: List<Todo>!
     //Todo型の配列(のようなもの)を宣言
     
     
@@ -16,36 +16,45 @@ class MaketodoViewController: UIViewController {
     @IBOutlet weak var shousaiTextField: UITextField!
     @IBOutlet weak var limitTextField: UITextField!
     
-    var datePicker: UIDatePicker = UIDatePicker()
+    //var datePicker: UIDatePicker = UIDatePicker()
+    var toolBar:UIToolbar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        limitTextField.delegate = self
+        setupToolbar()
         
-        datePicker.datePickerMode = UIDatePicker.Mode.date
-        datePicker.timeZone = NSTimeZone.local
-        datePicker.locale = Locale(identifier: "MDY")
-        limitTextField.inputView = datePicker
-        //車輪型に指定している。
-        datePicker.preferredDatePickerStyle = .wheels
-        // 決定バーの生成
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 35))
-        let spacelItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let doneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
-        toolbar.setItems([spacelItem, doneItem], animated: true)
-        
-        // インプットビュー設定
-        limitTextField.inputView = datePicker
-        limitTextField.inputAccessoryView = toolbar
-
     }
-    @objc func done() {
-        limitTextField.endEditing(true)
-           
-           // 日付のフォーマット
-           let formatter = DateFormatter()
-           formatter.dateFormat = "yyyy/MM/dd"
-        limitTextField.text = "\(formatter.string(from: Date()))"
-       }
+    func setupToolbar() {
+        //datepicker上のtoolbarのdoneボタン
+        toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let toolBarBtn = UIBarButtonItem(title: "DONE", style: .plain, target: self, action: #selector(doneBtn))
+        toolBar.items = [toolBarBtn]
+        limitTextField.inputAccessoryView = toolBar
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let datePickerView:UIDatePicker = UIDatePicker()
+        datePickerView.datePickerMode = UIDatePicker.Mode.date
+        datePickerView.preferredDatePickerStyle = .wheels
+        datePickerView.timeZone = NSTimeZone.local
+        datePickerView.locale = Locale(identifier: "MDY")
+        textField.inputView = datePickerView
+        datePickerView.addTarget(self, action: #selector(datePickerValueChanged(sender:)), for: UIControl.Event.valueChanged)
+    }
+    
+    //datepickerが選択されたらtextfieldに表示
+    @objc func datePickerValueChanged(sender:UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat  = "yyyy/MM/dd";
+        limitTextField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    //toolbarのdoneボタン
+    @objc func doneBtn(){
+        limitTextField.resignFirstResponder()
+    }
     @IBAction func save(_ sender: Any) {
         let newTodo = Todo()
         newTodo.todo = todoTextField.text!
@@ -63,15 +72,5 @@ class MaketodoViewController: UIViewController {
         }
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
