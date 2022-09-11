@@ -9,8 +9,8 @@ import UIKit
 import RealmSwift
 
 class ViewController: UIViewController{
-    
-    var todolist: List<Todo>!
+    var todos = [Todo]()
+    //var todolist: List<Todo>!
     let realm = try! Realm()
     @IBOutlet weak var tableview: UITableView!
     
@@ -18,7 +18,10 @@ class ViewController: UIViewController{
         super.viewWillAppear(animated)
         tableview.reloadData()
         
-            todolist = realm.objects(TodoList.self).first?.list
+            //todolist = realm.objects(TodoList.self).first?.list
+            todos = Array(realm.objects(Todo.self))
+        
+        //配列が全部帰ってくる(realmに入ってるtodo型のやつが全部帰ってくる)
             tableview.reloadData()
 
     }
@@ -29,7 +32,6 @@ class ViewController: UIViewController{
         tableview.delegate = self
         tableview.dataSource = self
         
-        tableview.reloadData()
     }
 //        do{
 //            todolist = realm.objects(TodoList.self).first?.list
@@ -42,20 +44,21 @@ class ViewController: UIViewController{
 }
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return realm.objects(TodoList.self).count
+        return realm.objects(Todo.self).count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TodoTableViewCell
-        cell.todolabel?.text = todolist[indexPath.row].todo
-        cell.timelabel?.text = todolist[indexPath.row].date
+        cell.todolabel?.text = todos[indexPath.row].todo
+        cell.timelabel?.text = todos[indexPath.row].date
         return cell
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             try! realm.write {
-                let item = todolist[indexPath.row]
+                let item = todos[indexPath.row]
+                todos.remove(at: indexPath.row)
                 realm.delete(item)
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -63,9 +66,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         try! realm.write {
-            let listItem = todolist[fromIndexPath.row]
-            todolist.remove(at: fromIndexPath.row)
-            todolist.insert(listItem, at: to.row)
+            let listItem = todos[fromIndexPath.row]
+            todos.remove(at: fromIndexPath.row)
+            todos.insert(listItem, at: to.row)
         }
     }
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
