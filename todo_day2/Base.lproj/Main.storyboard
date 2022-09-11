@@ -56,6 +56,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="YYl-Sh-Xng">
+                        <barButtonItem key="leftBarButtonItem" title="並び替え" id="886-5z-lSm">
+                            <connections>
+                                <action selector="narabilae:" destination="BYZ-38-t0r" id="uIa-kP-YdN"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="+" id="gFt-uA-sWp">
                             <connections>
                                 <segue destination="Q0Q-bw-Hc8" kind="show" id="0qV-LQ-wCb"/>

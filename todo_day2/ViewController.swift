@@ -19,7 +19,6 @@ class ViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableview.reloadData()
-        
         //todolist = realm.objects(TodoList.self).first?.list
         todos = Array(realm.objects(Todo.self))
         
@@ -35,12 +34,21 @@ class ViewController: UIViewController{
         tableview.dataSource = self
         
     }
+    
+    @IBAction func narabilae(_ sender: Any) {
+        if(tableview.isEditing){
+        tableview.isEditing = false
+        }else{
+            tableview.isEditing = true
+        }
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toNextViewController" {
             let nextVC = segue.destination as! EditViewController
             nextVC.selectedrowNum = nextnum
         }
     }
+    
 }
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
